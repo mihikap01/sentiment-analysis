@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Sentiment Analysis </title>
+</head>
+<body>
+    <main>
+        <h1> Welcome to the sentiment analysis website {{ prediction }} </h1>
+        <form id = 'abcd'>
+            <label for = 'sentiment'> </label>
+            <input type = 'text' id = 'sentiment' name = 'sentiment'>
+            <button type = "submit" name = "button"> Submit </button>
+        </form>
+        <div id = "output"></div>
+    </main>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    var s = "";
+    $(document).ready(function() {
+      $('#form').on('submit',function(e){
+        $.ajax({
+          data : {
+            sentiment : $('#sentiment').val(),
+          },
+          type : 'POST',
+          url : '/hello'
+        })
+        .done(function(data){
+          $('#output').text(data.output).show();
+          s = data.output;
+        });
+        e.preventDefault();
+      });
+    });
+</script>
+</html>
